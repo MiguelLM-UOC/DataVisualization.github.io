@@ -85,11 +85,11 @@ d3.csv("data_histogram2.csv", function(data) {
     u
         .enter()
         .append("rect") // Add a new rect for each new elements
+        .attr("class", "bar")
         .merge(u) // get the already existing elements as well
         .transition() // and apply changes to all of them
         .duration(1000)
           .attr("x", 1)
-          .attr("class", "bar")
           .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
           .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
           .attr("height", function(d) { return height - y(d.length); })
