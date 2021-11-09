@@ -8,11 +8,16 @@
     width: 50%;
     text-align: right;
     padding-right: 20px;
+    float:left;
   }
   #selector{
     width: 50%;
     text-align: left;
     padding-left: 20px;
+    display:inline;
+  }
+  #my_dataviz{
+    text-align: center;
   }
 .bar {
   fill: steelblue;
@@ -116,8 +121,9 @@ d3.csv("data_histogram2.csv", function(data) {
       .style("opacity", 1)
     tooltip
       .html("Range: " + d.x0 + " - " + d.x1)
-      .style("left", (d3.mouse(this)[0]+100) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
+      .style("left", (d3.mouse(this)[0]+10) + "px")
+      //.style("top", (d3.mouse(this)[1]) + "px")
+      .style("top", ("300px")
   }
   var moveTooltip = function(d) {
     tooltip
