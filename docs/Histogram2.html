@@ -63,9 +63,6 @@ d3.csv("data_histogram2.csv", function(data) {
         .duration(1000)
         .call(d3.axisLeft(y));
 
-    // Join the rect with the bins data
-    var u = svg.selectAll("rect")
-        .data(bins)
 
     // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
   // Its opacity is set to 0: we don't see it by default.
@@ -102,7 +99,11 @@ d3.csv("data_histogram2.csv", function(data) {
       .duration(100)
       .style("opacity", 0)
   }
-
+  
+  // Join the rect with the bins data
+  var u = svg.selectAll("rect")
+      .data(bins)
+    
   // Manage the existing bars and eventually the new ones:
     u
         .enter()
