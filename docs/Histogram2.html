@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-
+  #header{
+    width: 100%;
+  }
+  #title{
+    width: 50%;
+    text-align: right;
+    padding-right: 20px;
+  }
+  #selector{
+    width: 50%;
+    text-align: left;
+    padding-left: 20px;
+  }
 .bar {
   fill: steelblue;
 }
@@ -17,14 +29,19 @@
 </style>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
-
+<!--Header and bins selector -->
+<div id="header">
+  <div id="title"> <h1>Histograma</h1> </div>
+  <div id="selector">
+    <p>
+      <label># bins</label>
+      <input type="number" min="1" max="100" step="30" value="20" id="nBin">
+    </p>
+  </div>
+</div>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
-<p>
-  <label># bins</label>
-  <input type="number" min="1" max="100" step="30" value="20" id="nBin">
-</p>
 <script>
 
 // set the dimensions and margins of the graph
@@ -88,6 +105,7 @@ d3.csv("data_histogram2.csv", function(data) {
     .style("border-radius", "5px")
     .style("padding", "10px")
     .style("width", "200px")
+    .style("position", "absolute")
 
   // A function that change this tooltip when the user hover a point.
   // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
@@ -98,7 +116,7 @@ d3.csv("data_histogram2.csv", function(data) {
       .style("opacity", 1)
     tooltip
       .html("Range: " + d.x0 + " - " + d.x1)
-      .style("left", (d3.mouse(this)[0]+20) + "px")
+      .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
   var moveTooltip = function(d) {
