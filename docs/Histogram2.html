@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<style>
 
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}
+
+</style>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
@@ -75,6 +89,7 @@ d3.csv("data_histogram2.csv", function(data) {
         .transition() // and apply changes to all of them
         .duration(1000)
           .attr("x", 1)
+          .attr("class", "bar")
           .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
           .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
           .attr("height", function(d) { return height - y(d.length); })
