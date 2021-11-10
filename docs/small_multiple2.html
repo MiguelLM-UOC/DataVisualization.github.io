@@ -40,7 +40,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
    var format = d3.timeFormat("%d/%m/%Y 00:00:00");
   // Add X axis --> it is a date format
   var x = d3.scaleLinear()
-    .domain(d3.extent(data, function(d) { return format.parse(d.ORDERDATE); }))
+    .domain(d3.extent(data, function(d) { return format(d.ORDERDATE); }))
     .range([ 0, width ]);
   svg
     .append("g")
