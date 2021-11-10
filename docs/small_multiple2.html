@@ -37,15 +37,16 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-   var format = d3.timeFormat("%d/%m/%Y 00:00:00");
+  var format = d3.timeFormat("%m/%Y");
+  var parse = d3.timeParse("%d/%m/%Y 00:00:00");
   // Add X axis --> it is a date format
   var x = d3.scaleLinear()
-    .domain(d3.extent(data, function(d) { return format(d.ORDERDATE); }))
+    .domain(d3.extent(data, function(d) { return format(parse(d.ORDERDATE)); }))
     .range([ 0, width ]);
   svg
     .append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).ticks(3));
+    .call(d3.axisBottom(x).ticks(5));
 
   //Add Y axis
   var y = d3.scaleLinear()
