@@ -68,8 +68,8 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("stroke-width", 1.9)
       .attr("d", function(d){
         return d3.line()
-          .x(function(d) { return x(d.year); })
-          .y(function(d) { return y(+d.n); })
+          .x(function(d) { return x(d.ORDERDATE); })
+          .y(function(d) { return y(+d.SALES); })
           (d.values)
       })
 
