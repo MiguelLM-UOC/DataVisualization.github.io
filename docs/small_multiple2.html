@@ -38,7 +38,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
             "translate(" + margin.left + "," + margin.top + ")");
 
   var format = d3.timeFormat("%m/%Y");
-  var parse = d3.timeParse("%d/%m/%Y");
+  var parse = d3.timeParse("%m/%d/%Y");
   // Add X axis --> it is a date format
   var x = d3.scaleLinear()
     .domain(d3.extent(data, function(d) { return parse(d.ORDERDATE); }))
