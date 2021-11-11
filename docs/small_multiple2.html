@@ -22,7 +22,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
     
   // group the data: I want to draw one line per group
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    .key(function(d) { return d.COUNTRY && d3.timeMonth(parse(d.ORDERDATE));})
+    .key(function(d) { return d.COUNTRY && d3.timeMonth(parse(d.ORDERDATE)) && d3.timeYear(parse(d.ORDERDATE));})
     .entries(data);
 
   // What is the list of groups?
