@@ -68,6 +68,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("stroke-width", 1.9)
       .attr("d", function(d){
         return d3.line()
+          .interpolate("basis")
           .x(function(d) { return x(parse(d.ORDERDATE)); })
           .y(function(d) { return y(+d.SALES); })
           (d.values)
