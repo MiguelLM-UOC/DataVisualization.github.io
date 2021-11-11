@@ -17,9 +17,12 @@ var margin = {top: 30, right: 0, bottom: 30, left: 50},
 //Read the data
 d3.csv("small_multiple_EU.csv", function(data) {
 
+  var format = d3.timeFormat("%m/%Y");
+  var parse = d3.timeParse("%m/%d/%Y");
+    
   // group the data: I want to draw one line per group
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    .key(function(d) { return d.COUNTRY;})
+    .key(function(d) { return d.COUNTRY && d3.timeMonth(parse(d.ORDERDATE));})
     .entries(data);
 
   // What is the list of groups?
@@ -37,8 +40,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  var format = d3.timeFormat("%m/%Y");
-  var parse = d3.timeParse("%m/%d/%Y");
+
   // Add X axis --> it is a date format
   var x = d3.scaleLinear()
     .domain(d3.extent(data, function(d) { return parse(d.ORDERDATE); }))
