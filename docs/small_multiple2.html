@@ -26,7 +26,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
     //.key(function(d) { return d.COUNTRY && d3.timeMonth(parse(d.ORDERDATE)) && d3.timeYear(parse(d.ORDERDATE));})
     .key(function(d) { return d.COUNTRY;})
     .key(function(d) { return format(parse(d.ORDERDATE));})
-    .rollup(function(leaves) { return {"ORDERDATE": format(parse(leaves,function(d) {return (d.ORDERDATE)})), "SALES": d3.sum(leaves, function(d) {return (d.SALES);})}})
+    .rollup(function(leaves) { return {"ORDERDATE": format(d3.max(leaves,function(d) {return (parse(d.ORDERDATE));})), "SALES": d3.sum(leaves, function(d) {return (d.SALES);})}})
     .entries(data);
 
   // What is the list of groups?
@@ -75,8 +75,8 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("d", function(d){
         return d3.line()
           .curve(d3.curveBasis)
-          .x(function(d) { return x(parseshort(d.ORDERDATE)); })
-          .y(function(d) { return y(+d.SALES); })
+          .x(function(d) { return x(parseshort(d.key)); })
+          .y(function(d) { return y(d3.max(d.values,function(c) {return (parse(c.SALES));}));})
           (d.values)
       })
 
