@@ -54,7 +54,7 @@
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 800 - margin.left - margin.right,
-    height = 550 - margin.top - margin.bottom;
+    height = 520 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -122,7 +122,7 @@ d3.csv("data_histogram2.csv", function(data) {
       .duration(100)
       .style("opacity", 1)
     tooltip
-      .html("Range: " + d.x0 + " - " + d.x1)
+      .html("Range: " + d.x0 + " - " + d.x1 + "<br>" + "Frecuency: " + d.length)
       //.style("left", (d3.mouse(this)[0]+10) + "px")
       //.style("top", (550-d3.mouse(this)[1]) + "px")
       .style("top","80px")

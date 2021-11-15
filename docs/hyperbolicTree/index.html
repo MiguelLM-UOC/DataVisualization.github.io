@@ -10,38 +10,92 @@
     <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
 
     <script src="d3-hypertree.js"></script>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
     </head>
     <body>
         <script>  
-            const ht = new hyt.Hypertree(
-                { parent: document.body },
-                { 
-                    langInitBFS: (ht, n)=> {                
-                        n.precalc.label = n.data.name                        
-                    },
-                    dataloader: ok => ok({
-                        name:'A',
-                        children:[
-                            { name: 'B' },
-                            { name: 'C' },
-                            { name: 'D' },
-                            { 
-                                name: 'E',
-                                children: [
-                                    { name: 'F' },
-                                    { name: 'G' },
-                                ]
-                            },
-                        ]
-                    }),
-                    interaction: {
-                        λbounds: [ .4, .8 ],
-                    }                 
-                }
-            )
-            ht.initPromise
-                .then(()=> new Promise((ok, err)=> ht.animateUp(ok, err)))            
-                .then(()=> ht.drawDetailFrame())               
+      //Read the data
+        	d3.tsv("mushroomsclasification.csv", function(data) {
+        		 // group the data: I want to draw one line per group
+       		  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+       		    .key(function(d) { return d.kingdom;})
+       		    .key(function(d) { return d.phylum;})
+       		    .key(function(d) { return d.class;})
+       		    .key(function(d) { return d.order;})
+       		    .key(function(d) { return d.family;})
+       		    .key(function(d) { return d.genus;})
+       		    .key(function(d) { return d.species;})
+       		    .entries(data);
+        	  
+        	  function tree(nodes) {
+        		  var nodeById = {};
+
+        		  // Index the nodes by id, in case they come out of order.
+        		  nodes.forEach(function(d) {
+        		    nodeById[d.key] = d;
+        		  });
+
+        		  // Lazily compute children.
+        		  nodes.forEach(function(d) {
+        		    if ("key" in d) {
+        		      var name = nodeById[d.key];
+        		      if (name.children) name.children.push(d);
+        		      else name.children = [d];
+        		    }
+        		  });
+
+        		  return nodes[0];
+        		}
+        	  var datos = tree(sumstat);
+//                const ht = new hyt.Hypertree(
+//                        { parent: document.body },
+//                        { 
+//                            langInitBFS: (ht, n)=> {                
+//                                n.precalc.label = n.data.key                        
+//                            },
+//                            dataloader: ok => ok({
+//                                name:'A',
+//                                children:[
+//                                    { name: 'B' },
+//                                    { name: 'C' },
+//                                    { name: 'D' },
+//                                    { 
+//                                        name: 'E',
+//                                        children: [
+//                                            { name: 'F' },
+//                                            { name: 'G' },
+//                                        ]
+//                                    },
+//                                ]
+//                            }),
+//                            interaction: {
+//                                λbounds: [ .4, .8 ],
+//                            }                 
+//                        }
+//                    )
+//console.log(sumstat);
+				const ht = new hyt.Hypertree(
+                       { parent: document.body },
+                       { 
+                           langInitBFS: (ht, n)=> {                
+                               n.precalc.label = n.data.key                        
+                           },
+                           dataloader: ok => ok(sumstat.toString()),
+                           interaction: {
+                               λbounds: [ .4, .8 ],
+                           }                 
+                       }
+                   )	
+                   ht.initPromise
+                       .then(()=> new Promise((ok, err)=> ht.animateUp(ok, err)))            
+                       .then(()=> ht.drawDetailFrame())
+        	
+        	})     
+	       	
+
+      
+
         </script>
     </body>
 </html>

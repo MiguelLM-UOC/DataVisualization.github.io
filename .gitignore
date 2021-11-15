@@ -1,0 +1,13 @@
+
+.project
+.settings/.jsdtscope
+.settings/org.eclipse.wst.common.component
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.settings/org.eclipse.wst.jsdt.ui.superType.container
+.settings/org.eclipse.wst.jsdt.ui.superType.name
+docs-20211115T152359Z-001.zip
+docs/hyperbolicTree/DataSets/0053191-210914110416597.zip
+docs/hyperbolicTree/DataSets/Mushroom_KIDR-MR/.RData
+docs/hyperbolicTree/DataSets/Mushroom_KIDR-MR/.Rhistory
+docs/hyperbolicTree/DataSets/Mushroom_KIDR-MR/0053191-210914110416597.csv
+docs/hyperbolicTree/DataSets/Mushroom_KIDR-MR/mushroomsclasification.csv
