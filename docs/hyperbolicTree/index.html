@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-    <title>Hyperbolic tree</title>
+    <title>Hyperbolic tree of Mushrooms Taxonomy</title>
     <meta charset="UTF-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="dcterms.rightsHolder" content="Copyright © 2018 Glatzhofer Michael">
     
     <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
 
@@ -14,6 +13,21 @@
 <script src="https://d3js.org/d3.v4.js"></script>
     </head>
     <body>
+    <div>
+    	<h1>Hyperbolic Tree of  mushrooms taxonomy</h1>
+    	by
+    	<ul>
+    		<li>Kingdom</li>
+    		<li>Phylum</li>
+    		<li>Class</li>
+    		<li>Order</li>
+    		<li>Family</li>
+    		<li>Genus</li>
+    		<li>Species</li>
+    		<li>Scientific name</li>
+    	</ul>
+    </div>
+    <div id="htree" ></div>
         <script>  
       //Read the data
           d3.tsv("mushroomsclasification.csv", function(data) {
@@ -75,7 +89,7 @@
         	const nodeInitR =        (c)=> (ud, d)=> c * ((d.children && d.parent) ? innerNodeScale(d) : 1)
         	const innerNodeScale =   d=> d.precalc.weightScale
 			const ht = new hyt.Hypertree(
-                       { parent: document.body },
+                       { parent: document.querySelector('#htree') },
                        { 
                     	   title: "Mushrooms taxonomy",
                     	   langInitBFS: (ht, n)=> {                
