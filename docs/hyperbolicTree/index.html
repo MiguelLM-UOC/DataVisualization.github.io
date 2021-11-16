@@ -16,9 +16,9 @@
     <body>
         <script>  
       //Read the data
-        	d3.tsv("mushroomsclasification.csv", function(data) {
+          d3.tsv("mushroomsclasification.csv", function(data) {
         		 // group the data: I want to draw one line per group
-       		  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+       		var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
        		    .key(function(d) { return d.kingdom;})
        		    .key(function(d) { return d.phylum;})
        		    .key(function(d) { return d.class;})
@@ -28,60 +28,63 @@
        		    .key(function(d) { return d.species;})
        		    .entries(data);
         	  
-        	  function tree(nodes) {
-        		  var nodeById = {};
+       		function procesnode(node) {
+       			var newnode = {};
+       			if ("key" in node) {
+      		      newnode.name = node.key;
+      		      if (node.values) {
+      		    	  node.values.forEach(function(d) {
+      		    		  var child = procesnode(d);
+      		    		  if (newnode.children) newnode.children.push(child);
+      	      		      else newnode.children = [child];  
+      		    	  });
+      		      }
+      		    }else{
+      		    	procesleave(node)
+    		    }
+       			return newnode;
+       		}
 
-        		  // Index the nodes by id, in case they come out of order.
-        		  nodes.forEach(function(d) {
-        		    nodeById[d.key] = d;
-        		  });
+       		function procesleave(leave) {
+       			var newleaf = {};
+       			if ("scientificName" in leave) {
+       				newleaf.name = leave.scientificName;
+       			}
+       			return newleaf;
+       		}       		
+        	
+        	function tree(nodes) {
+        		  var structureddata = {};
 
         		  // Lazily compute children.
         		  nodes.forEach(function(d) {
         		    if ("key" in d) {
-        		      var name = nodeById[d.key];
-        		      if (name.children) name.children.push(d);
-        		      else name.children = [d];
+        		      structureddata.name = d.key;
+        		      if (d.values) {
+          		    	  d.values.forEach(function(e) {
+          		    		  var child = procesnode(e);
+          		    		  if (structureddata.children) structureddata.children.push(child);
+          	      		      else structureddata.children = [child];  
+          		    	  });
+          		      }
         		    }
         		  });
-
-        		  return nodes[0];
-        		}
-        	  var datos = tree(sumstat);
-//                const ht = new hyt.Hypertree(
-//                        { parent: document.body },
-//                        { 
-//                            langInitBFS: (ht, n)=> {                
-//                                n.precalc.label = n.data.key                        
-//                            },
-//                            dataloader: ok => ok({
-//                                name:'A',
-//                                children:[
-//                                    { name: 'B' },
-//                                    { name: 'C' },
-//                                    { name: 'D' },
-//                                    { 
-//                                        name: 'E',
-//                                        children: [
-//                                            { name: 'F' },
-//                                            { name: 'G' },
-//                                        ]
-//                                    },
-//                                ]
-//                            }),
-//                            interaction: {
-//                                λbounds: [ .4, .8 ],
-//                            }                 
-//                        }
-//                    )
-//console.log(sumstat);
-				const ht = new hyt.Hypertree(
+        		  return structureddata;
+        	}
+        	var datos = tree(sumstat);
+        	const nodeInitR =        (c)=> (ud, d)=> c * ((d.children && d.parent) ? innerNodeScale(d) : 1)
+        	const innerNodeScale =   d=> d.precalc.weightScale
+			const ht = new hyt.Hypertree(
                        { parent: document.body },
                        { 
-                           langInitBFS: (ht, n)=> {                
-                               n.precalc.label = n.data.key                        
+                    	   title: "Mushrooms taxonomy",
+                    	   langInitBFS: (ht, n)=> {                
+                               n.precalc.label = n.data.name                        
                            },
-                           dataloader: ok => ok(sumstat.toString()),
+                           dataloader: ok => ok(datos),
+                           geometry: {
+                        	   nodeRadius: nodeInitR(.0075),
+                           }, 
                            interaction: {
                                λbounds: [ .4, .8 ],
                            }                 

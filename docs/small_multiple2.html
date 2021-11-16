@@ -76,7 +76,6 @@ d3.csv("small_multiple_EU.csv", function(data) {
         return d3.line()
           .curve(d3.curveBasis)
           .x(function(d) { return x(parseshort(d.key)); })
-          //.y(function(d) { return y(d3.sum(d, function(e) {return (e.SALES);}));})
           .y(function(d) { return y(d.value.SALES);})
           (d.values)
       })

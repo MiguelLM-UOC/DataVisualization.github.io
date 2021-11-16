@@ -1,4 +1,4 @@
-taxonKey	scientificName	acceptedTaxonKey	acceptedScientificName	numberOfOccurrences	taxonRank	taxonomicStatus	kingdom	kingdomKey	phylum	phylumKey	class	classKey	order	orderKey	family	familyKey	genus	genusKey	species	speciesKey	iucnRedListCategory
+﻿taxonKey	scientificName	acceptedTaxonKey	acceptedScientificName	numberOfOccurrences	taxonRank	taxonomicStatus	kingdom	kingdomKey	phylum	phylumKey	class	classKey	order	orderKey	family	familyKey	genus	genusKey	species	speciesKey	iucnRedListCategory
 2527593	Panellus serotinus (Pers.) Kühner	2527596	Hohenbuehelia serotina (Pers.) Singer	1	SPECIES	SYNONYM	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Agaricales	1499	Pleurotaceae	4183	Hohenbuehelia	2526255	Hohenbuehelia serotina	2527596	
 2538774	Hygrophorus lucorum Kalchbr.	2538774	Hygrophorus lucorum Kalchbr.	3	SPECIES	ACCEPTED	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Agaricales	1499	Hygrophoraceae	4176	Hygrophorus	2525706	Hygrophorus lucorum	2538774	
 5243429	Agaricus augustus Fr.	5243429	Agaricus augustus Fr.	1	SPECIES	ACCEPTED	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Agaricales	1499	Agaricaceae	4170	Agaricus	2518646	Agaricus augustus	5243429	
@@ -256,7 +256,6 @@ taxonKey	scientificName	acceptedTaxonKey	acceptedScientificName	numberOfOccurren
 5238373	Clavaria ligula Schaeff.	2521387	Clavariadelphus ligula (Schaeff.) Donk	3	SPECIES	SYNONYM	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Gomphales	1303	Clavariadelphaceae	8466	Clavariadelphus	2521383	Clavariadelphus ligula	2521387	
 3322936	Marasmius siccus (Schwein.) Fr.	3322936	Marasmius siccus (Schwein.) Fr.	5	SPECIES	ACCEPTED	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Agaricales	1499	Marasmiaceae	4179	Marasmius	2526678	Marasmius siccus	3322936	
 3552995	Rhodophyllus violaceus (Murrill) Singer	7408140	Entoloma cyaneum Sacc.	2	SPECIES	SYNONYM	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Agaricales	1499	Entolomataceae	4174	Entoloma	2530002	Entoloma cyaneum	7408140	
-5	Fungi	5	Fungi	33	KINGDOM	ACCEPTED	Fungi	5													
 2521391	Clavariadelphus pistillaris (L.) Donk	2521391	Clavariadelphus pistillaris (L.) Donk	1	SPECIES	ACCEPTED	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Gomphales	1303	Clavariadelphaceae	8466	Clavariadelphus	2521383	Clavariadelphus pistillaris	2521391	
 2524490	Leccinum versipelle (Fr. & Hök) Snell	2524490	Leccinum versipelle (Fr. & Hök) Snell	2	SPECIES	ACCEPTED	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Boletales	1063	Boletaceae	8789	Leccinum	2520104	Leccinum versipelle	2524490	
 7988694	Boletus luridus Schaeff.	3355021	Suillellus luridus (Schaeff.) Murrill	2	SPECIES	SYNONYM	Fungi	5	Basidiomycota	34	Agaricomycetes	186	Boletales	1063	Boletaceae	8789	Suillellus	7240504	Suillellus luridus	3355021	
