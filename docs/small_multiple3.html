@@ -303,7 +303,7 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("x", 1)
       .attr("width", function(s) { return x(s.x1) - x(s.x0); })
       .attr("height", function(s) { return height - y(s.length); })
-      .attr("fill", "#c9c9c9");
+      .attr("fill", function(d){ return color(d.key) });
 
   bars.append("text")
       .attr("class", "hist label")
@@ -311,12 +311,12 @@ d3.csv("small_multiple_EU.csv", function(data) {
       .attr("y", -12)
       .attr("x", function(s) { return (x(s.x1) - x(s.x0))/2; })
       .attr("text-anchor", "middle")
-      .text(function(s) { 
-        if (s.length > 0) {
-          return s.length;   
-        }
-      })
-      .style("fill", "charcoal");
+      //.text(function(s) { 
+      //  if (s.length > 0) {
+      //    return s.length;   
+      //  }
+      //})
+      //.style("fill", "charcoal");
   
 
 
