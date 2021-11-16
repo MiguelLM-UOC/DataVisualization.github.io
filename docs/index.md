@@ -1,4 +1,13 @@
-# Histograms
+# Histogramas
+**Nombre:** Histograma   
+**Origen:** El término "histograma" fue acuñado en 1891 por el matemático estadístico inglés [Karl Pearson](https://es.wikipedia.org/wiki/Karl_Pearson).   
+**Descripción:**
+**Ejemplos de aplicación:**
+
+**Tipo de datos que se pueden representar**
+**Estructura de los datos**
+**Limitaciones**
+
 [Ejemplo de un **Histograma** creado con **d3**](https://miguellm-uoc.github.io/DataVisualizationPEC2/Histogram2.html)
 
 # Small Multiple
