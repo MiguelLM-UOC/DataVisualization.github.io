@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<script>
+
+// // set the dimensions and margins of the graph
+// var margin = {top: 30, right: 0, bottom: 30, left: 50},
+//     width = 300 - margin.left - margin.right,
+//     height = 210 - margin.top - margin.bottom;
+
+// //Read the data
+// d3.csv("small_multiple_EU.csv", function(data) {
+
+//   var format = d3.timeFormat("%m/%Y");
+//   var parse = d3.timeParse("%m/%d/%Y");
+//   var parseshort = d3.timeParse("%m/%Y");
+    
+//   // group the data: I want to draw one line per group
+//   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+//     //.key(function(d) { return d.COUNTRY && d3.timeMonth(parse(d.ORDERDATE)) && d3.timeYear(parse(d.ORDERDATE));})
+//     .key(function(d) { return d.COUNTRY;})
+//     .entries(data);
+
+//   // What is the list of groups?
+//   allKeys = sumstat.map(function(d){return d.key})
+
+//   // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
+//   var svg = d3.select("#my_dataviz")
+//     .selectAll("uniqueChart")
+//     .data(sumstat)
+//     .enter()
+//     .append("svg")
+//       .attr("width", width + margin.left + margin.right)
+//       .attr("height", height + margin.top + margin.bottom)
+//     .append("g")
+//       .attr("transform",
+//             "translate(" + margin.left + "," + margin.top + ")");
+
+
+//   // X axis: scale and draw:
+//   var x = d3.scaleLinear()
+//       .domain([0, d3.max(data, function(d) { return +d.SALES })])     
+//       .range([0, width]);
+//   svg.append("g")
+//       .attr("transform", "translate(0," + height + ")")
+//       .call(d3.axisBottom(x));
+  
+//    // Y axis: initialization
+//       var y = d3.scaleLinear()
+//           .range([height, 0]);
+//       var yAxis = svg.append("g")
+
+// //   //Add Y axis
+// //   var y = d3.scaleLinear()
+// //     .domain([0, d3.max(sumstat, function(d) { return d3.max(d.values, function(e) { return e.value.SALES; }); })])
+// //     .range([ height, 0 ]);
+// //   svg.append("g")
+// //     .call(d3.axisLeft(y).ticks(5));
+// // A function that builds the graph for a specific value of bin
+
+//   // color palette
+//   var color = d3.scaleOrdinal()
+//     .domain(allKeys)
+//     .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
+
+//   function update(nBin) {
+
+//     // set the parameters for the histogram
+//     var histogram = d3.histogram()
+//         .value(function(d) { return d.SALES; })   // I need to give the vector of value
+//         .domain(x.domain())  // then the domain of the graphic
+//         .thresholds(x.ticks(nBin)); // then the numbers of bins
+
+//      // apply histogram generator to each region's values
+//         var regions = sumstat.map(function(d) { 
+//           return {
+//             key: d.key,
+//             values: histogram(d.values)  
+//           }
+//         });
+//      // calculate local y-max for each region
+//      var localMax = regions.map(function(d) {
+//        return {
+//          region: d.key,
+//          max: d3.max(d.values, function(s) {
+//            return s.length;
+//          })
+//        }
+//      })
+     
+//      // find global max
+//      y.domain([0, d3.max(localMax, function(d) { return d.max; })])       
+        
+// //     // And apply this function to data to get the bins
+// //     var bins = histogram(sumstat.values);
+
+// //     // Y axis: update now that we know the domain
+// //     y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+// //     yAxis
+// //         .transition()
+// //         .duration(1000)
+// //         .call(d3.axisLeft(y));
+
+// // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
+//   // Its opacity is set to 0: we don't see it by default.
+//   var tooltip = d3.select("#my_dataviz")
+//     .append("div")
+//     .style("opacity", 0)
+//     .attr("class", "tooltip")
+//     .style("background-color", "black")
+//     .style("color", "white")
+//     .style("border-radius", "5px")
+//     .style("padding", "10px")
+//     .style("width", "200px")
+//     .style("position", "absolute")
+
+//   // A function that change this tooltip when the user hover a point.
+//   // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+//   var showTooltip = function(d) {
+//     tooltip
+//       .transition()
+//       .duration(100)
+//       .style("opacity", 1)
+//     tooltip
+//       .html("Range: " + d.x0 + " - " + d.x1 + "<br>" + "Frecuency: " + d.length)
+//       //.style("left", (d3.mouse(this)[0]+10) + "px")
+//       //.style("top", (550-d3.mouse(this)[1]) + "px")
+//       .style("top","80px")
+//       .style("left","60%")
+//   }
+//   var moveTooltip = function(d) {
+//     tooltip
+//       //.style("left", (d3.mouse(this)[0]+10) + "px")
+//       //.style("top", (550-d3.mouse(this)[1]) + "px")
+//       .style("top","80px")
+//       .style("left","60%")
+//   }
+//   // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+//   var hideTooltip = function(d) {
+//     tooltip
+//       .transition()
+//       .duration(100)
+//       .style("opacity", 0)
+//   }
+    
+    
+//     // Join the rect with the bins data
+//     var u = svg.selectAll("rect")
+//         .data(regions)
+
+//     // Manage the existing bars and eventually the new ones:
+//     u
+//         .enter()
+//         .append("rect") // Add a new rect for each new elements
+//         .attr("class", "bar")
+//         // Show tooltip on hover
+//         .on("mouseover", showTooltip )
+//         .on("mousemove", moveTooltip )
+//         .on("mouseleave", hideTooltip )
+//         .merge(u) // get the already existing elements as well
+//         .transition() // and apply changes to all of them
+//         .duration(1000)
+//           .attr("x", 1)
+//           .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
+//           .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+//           .attr("height", function(d) { return height - y(d.length); })
+//           //.style("fill", "#69b3a2")
+
+
+//     // If less bar in the new histogram, I delete the ones not in use anymore
+//     u
+//         .exit()
+//         .remove()
+
+//     }
+
+
+//   // Initialize with 20 bins
+//   update(20)
+
+
+//   // Add titles
+//   svg
+//     .append("text")
+//     .attr("text-anchor", "start")
+//     .attr("y", -5)
+//     .attr("x", 0)
+//     .text(function(d){ return(d.key)})
+//     .style("fill", function(d){ return color(d.key) })
+
+// })
+
+var margin = {top:70, right:50, bottom:40, left:30},
+    width = 300 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
+
+var parseDate = d3.timeParse("%d/%m/%Y");
+var formatDateIntoYear = d3.timeFormat("%Y");
+
+//X axis: scale and draw:
+var x = d3.scaleLinear()
+    .range([0, width]);
+
+// y scale for histogram
+var y = d3.scaleLinear()
+    .range([height, 0]);
+
+
+// load data
+d3.csv("small_multiple_EU.csv", function(data) {
+
+  x.domain([0, d3.max(data, function(d) { return +d.SALES })]);
+
+  // set parameters for histogram
+  var histogram = d3.histogram()
+      .value(function(d) { return d.SALES; })
+      .domain(x.domain())
+      .thresholds(x.ticks(12));
+
+  // nest data by region
+  var nest = d3.nest()
+      .key(function(d) { return d.COUNTRY;})
+      .entries(data);
+  // What is the list of groups?
+  allKeys = nest.map(function(d){return d.key})
+  // color palette
+  var color = d3.scaleOrdinal()
+    .domain(allKeys)
+    .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])  
+  
+  // apply histogram generator to each region's values
+  var regions = nest.map(function(d) { 
+    return {
+      key: d.key,
+      values: histogram(d.values)  
+    }
+  });
+
+  // calculate local y-max for each region
+  var localMax = regions.map(function(d) {
+    return {
+      region: d.key,
+      max: d3.max(d.values, function(s) {
+        return s.length;
+      })
+    }
+  })
+  
+  // find global max
+  y.domain([0, d3.max(localMax, function(d) { return d.max; })])
+
+  
+  // for each region, set up a svg with axis and label
+  var svg = d3.select("#my_dataviz").selectAll("svg")
+      .data(regions)
+      .enter()
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom);
+
+  // Add titles
+  svg
+    .append("text")
+    .attr("text-anchor", "start")
+    .attr("y", margin.left)
+    .attr("x", margin.top/2)
+    .text(function(d){ return(d.key)})
+    .style("fill", function(d){ return color(d.key) })
+
+
+  var hist = svg.append("g")
+      .attr("class", "hist")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  hist.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0" + "," + height + ")")
+      .call(d3.axisBottom(x)
+          .ticks(4)
+      );
+  hist.append("g")
+	  .attr("class", "axis")
+	  .call(d3.axisLeft(y).ticks(5)); 
+
+  // draw histogram bars
+  var bars = hist.selectAll(".bar")
+      .data(function(d) { return d.values; })
+      .enter()
+      .append("g")
+      .attr("class", "bar")
+      .attr("transform", function(s) {
+        return "translate(" + x(s.x0) + "," + y(s.length) + ")";
+      });
+
+  bars.append("rect")
+      .attr("class", "bar")
+      .attr("x", 1)
+      .attr("width", function(s) { return x(s.x1) - x(s.x0); })
+      .attr("height", function(s) { return height - y(s.length); })
+      .attr("fill", "#c9c9c9");
+
+  bars.append("text")
+      .attr("class", "hist label")
+      .attr("dy", ".75em")
+      .attr("y", -12)
+      .attr("x", function(s) { return (x(s.x1) - x(s.x0))/2; })
+      .attr("text-anchor", "middle")
+      .text(function(s) { 
+        if (s.length > 0) {
+          return s.length;   
+        }
+      })
+      .style("fill", "charcoal");
+  
+
+
+});
+
+
+</script>
