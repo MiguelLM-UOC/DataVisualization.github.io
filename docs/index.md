@@ -1,3 +1,6 @@
+# Visualización Datos PEC2
+### Miguel López Marzabal 
+### Máster en Ciencia de Datos de la UOC
 ### URL: https://miguellm-uoc.github.io/DataVisualizationPEC2/
 
 # Histogramas
