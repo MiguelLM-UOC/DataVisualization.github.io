@@ -22,7 +22,7 @@
 **Limitaciones** La ubicación de las gráficas debe seguir un orden lógico, para que el usuario pueda localizar fácilmente la información de interés.  
 
 
-[Ejemplo de un **Small Multiple**, con gráficas de línea, creado con **d3**](https://miguellm-uoc.github.io/DataVisualizationPEC2/small_multiple2.html)
+[Ejemplo de un **Small Multiple**, con gráficas de línea, creado con **d3**](https://miguellm-uoc.github.io/DataVisualizationPEC2/small_multiple2.html)   
 [Ejemplo de un **Small Multiple**, con histogramas, creado con **d3**](https://miguellm-uoc.github.io/DataVisualizationPEC2/small_multiple3.html)
 
 
